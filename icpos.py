@@ -12,15 +12,53 @@ def checkout(itemCodes, prices):
 
     for code in set(itemCodes):
 
-        amount = itemCodes.count(code)
+        if code in prices.keys():
         
-        if code in offerAmount.keys() and amount >= offerAmount[code]:
+            amount = itemCodes.count(code)
+        
+            if code in offerAmount.keys() and amount >= offerAmount[code]:
 
                 price += offerPrice[code] * int(amount / offerAmount[code])
                 price += amount % offerAmount[code] * prices[code]
+                
+            else:
+                
+                price += amount * prices[code]
 
         else:
 
-            price += amount * prices[code]
+            print('Error: Unknown item code ' + code)
 
     return price
+
+
+class Checkout():
+
+    """
+    Can be instantiated with the current prices. Provides two methods: scan(itemCode) and total()
+    The latter should be callable at any time to obtain a correct total for the items scanned so far.
+    """
+    
+    def __init__(self, prices):
+
+        setattr(self,'prices',prices)
+        setattr(self,'items',list())
+
+    def scan(self,itemCode):
+
+        if(itemCode in self.prices.keys()):
+            self.items.append(itemCode)
+        else:
+            print('Error: Unknown item code ' + itemCode)
+
+    def total(self):
+
+        print(checkout(self.items, self.prices))
+
+    def printItems(self):
+
+        print(self.items)
+
+    def printPrices(self):
+        
+        print(self.prices)
