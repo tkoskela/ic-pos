@@ -1,1 +1,21 @@
 Source files for application to Imperial College
+
+icpos.py contains the function checkout and the class Checkout. They can be invoked interactively by, eg.
+
+checkout(['B','A','B','P','B','A','A','A'], {'A':25, 'B':40, 'P': 30})
+
+c = Checkout({'A':25,'B':30,'P':40})
+c.scan('A')
+c.total()
+
+test.py contains a script that runs a set of test cases through checkout and Checkout and compares to reference values. These tests include
+
+- single item tests
+- multiple item test
+- tests with offers using exact amount for offer
+- tests with offers using larger amount than offer
+- tests with 0 price
+
+tests.py can be invoked in the terminal by
+
+python tests.py
