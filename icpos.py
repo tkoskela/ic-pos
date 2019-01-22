@@ -53,7 +53,7 @@ class Checkout():
 
     def total(self):
 
-        print(checkout(self.items, self.prices))
+        return checkout(self.items, self.prices)
 
     def printItems(self):
 
