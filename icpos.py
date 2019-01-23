@@ -4,29 +4,39 @@ def checkout(itemCodes, prices):
     takes a list of item codes and their current prices and
     returns the total price in pence, after applying any relevant offers.
     """
-    
+
+    # Define offers
     offerAmount = {'A': 3, 'B': 3}
     offerPrice = {'A': 2 * prices['A'], 'B': 100}
 
+    # Initialize price
     price = 0
 
+    # Loop through a set of unique item codes
     for code in set(itemCodes):
 
+        # Check if the item code has a price associated with it
         if code in prices.keys():
-        
+
+            # Count the number of occurrences of this code
             amount = itemCodes.count(code)
-        
+
+            # Check if the item code has an offer
+            # Assuming only one offer per item
             if code in offerAmount.keys() and amount >= offerAmount[code]:
 
+                # Add the offer price for each completed offer. Add the regular price for the remainder.
                 price += offerPrice[code] * int(amount / offerAmount[code])
                 price += amount % offerAmount[code] * prices[code]
                 
             else:
-                
+
+                # Add the regular price for each item
                 price += amount * prices[code]
 
         else:
 
+            # Print an error if the item code does not have a price, add nothing to the total.
             print('Error: Unknown item code ' + code)
 
     return price
